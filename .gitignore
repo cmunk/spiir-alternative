@@ -1,0 +1,24 @@
+.DS_Store
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+dist/
+*.tsbuildinfo
+*.db
+*.sqlite3
+.env
+
+# Never commit real banking, receipt, or ledger data.
+data/*
+!data/.gitkeep
+
+backend/data/*
+!backend/data/.gitkeep
+
+frontend/dist/
+frontend/vite.config.js
+frontend/vite.config.d.ts
+screenshots/raw-private/*
