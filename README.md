@@ -4,13 +4,16 @@ This is a clean reference export of the reusable pieces from a private personal 
 
 1. fetch bank transactions through Enable Banking / Nordea
 2. normalize them into a local ledger
-3. save local category, note, hashtag, date, split, and review overrides
-4. rebuild a Spiir-style income/expense overview from that local ledger
-5. optionally import Storebox receipt JSON for receipt/item analysis
+3. attempt to categorize new Nordea rows from repeated historical ledger matches
+4. save local category, note, hashtag, date, split, and review overrides
+5. rebuild a Spiir-style income/expense overview from that local ledger
+6. optionally import Storebox receipt JSON for receipt/item analysis
 
 This is **not** a polished starter app. Treat it as a map and code archive for your own project.
 
 The most important external setup is Enable Banking/Nordea access. Start with [docs/enable-banking.md](docs/enable-banking.md) if you want to make the bank fetch work.
+
+Related Danish discussion: [r/dkfinance post](https://www.reddit.com/r/dkfinance/comments/1tpbb53/inspiration_til_selfhosted_spiiralternativ/).
 
 ## Screenshots
 
@@ -39,7 +42,7 @@ These show the kind of workflows the exported code supports.
 ## What Is Included
 
 - `backend/app/nordea_service.py`: Enable Banking/Nordea transaction fetch, raw storage, normalization, status, and taxonomy helpers.
-- `backend/app/spiir_local_ledger_service.py`: local transaction ledger, override application, sync from Nordea, split migration/repair, and paged transaction responses.
+- `backend/app/spiir_local_ledger_service.py`: local transaction ledger, override application, sync from Nordea, history-based category suggestions, split migration/repair, and paged transaction responses.
 - `backend/app/spiir_service.py`: Spiir-style processed overview, income/expense series, rebuild state, hashtag helpers, and summary output.
 - `backend/app/local_ledger_overrides.py`: shared override normalization/application rules.
 - `backend/app/kvitteringer_service.py`: Storebox receipt import, SQLite indexes, item clustering, category overrides, and receipt/Spiir linking helpers.
@@ -64,7 +67,7 @@ This repo is meant to contain reusable code and redacted examples only.
 
 ## Seed From Existing Spiir Data
 
-Before Spiir disappears, download your full postings dataset if you can. This gives you historical transactions and a useful category history for matching future Nordea rows.
+Before Spiir disappears, download your full postings dataset if you can. This gives you historical transactions and a useful category history for matching future Nordea rows. During Nordea sync, uncategorized new rows can be assigned a category when matching historical rows agree strongly enough.
 
 Save the downloaded JSON as:
 
